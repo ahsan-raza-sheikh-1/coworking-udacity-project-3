@@ -11,7 +11,7 @@ In the `starter` folder, you'll find 2 folders, one named `frontend` and one nam
 
 ## Deployment and submission
 
-The public repository is [ahsan-raza-sheikh-1/coworking-udacity-project-3](https://github.com/ahsan-raza-sheikh-1/coworking-udacity-project-3). [SUBMISSION.md](./SUBMISSION.md) contains the workflow links, deployment endpoints, image references, and evidence files for this project.
+The public repository is [ahsan-raza-sheikh-1/coworking-udacity-project-3](https://github.com/ahsan-raza-sheikh-1/coworking-udacity-project-3). The project source, workflows, Kubernetes manifests, and infrastructure configuration are maintained here.
 
 ## Project Status
 
@@ -29,7 +29,7 @@ The repository contains four workflows under `.github/workflows`:
 | Frontend CD | [frontend-cd.yaml](.github/workflows/frontend-cd.yaml) | Pushes to `main` and manual runs |
 | Backend CD | [backend-cd.yaml](.github/workflows/backend-cd.yaml) | Pushes to `main` and manual runs |
 
-The CI workflows run lint and tests in parallel before building Docker images. The CD workflows authenticate to AWS through GitHub Secrets, push SHA-tagged images to ECR, apply the Kubernetes manifests, update the deployment image, wait for rollout completion, and print the deployed image and LoadBalancer endpoint as deployment evidence. Successful run links belong in [SUBMISSION.md](SUBMISSION.md).
+The CI workflows run lint and tests in parallel before building Docker images. The CD workflows authenticate to AWS through GitHub Secrets, push SHA-tagged images to ECR, apply the Kubernetes manifests, update the deployment image, wait for rollout completion, and print the deployed image and LoadBalancer endpoint as deployment evidence. Run history is available from [GitHub Actions](https://github.com/ahsan-raza-sheikh-1/coworking-udacity-project-3/actions).
 
 ### Verified AWS Deployment
 
@@ -43,19 +43,7 @@ The following deployment was verified on 2026-09-15 in the `cluster` EKS cluster
 * Frontend returned HTTP 200 and its bundle contained the live backend hostname and `/movies` path.
 * Both deployments were `1/1` ready with Running pods.
 
-These LoadBalancer hostnames are ephemeral and must be rechecked after any infrastructure recreation. See [SUBMISSION.md](SUBMISSION.md) for the complete evidence checklist.
-
-### Submission package and evidence
-
-The [movie_picture_pipeline_submission.zip](movie_picture_pipeline_submission.zip) archive includes the application source, four workflow files, Kubernetes manifests, Terraform configuration, buildspecs, and evidence images. It excludes `.env`, Git metadata, Terraform state, dependency folders, build output, caches, and nested ZIP files. Successful run URLs should be added to [SUBMISSION.md](SUBMISSION.md) after the Actions workflows complete.
-
-* [Frontend application screenshot](evidence/frontend-application.png)
-* [Backend API screenshot](evidence/backend-api.png)
-* [LoadBalancer screenshot](2.LB.png)
-* [`kubectl get all` screenshot](evidence/kubectl-get-all.png)
-* [`kubectl describe deployment` screenshot](evidence/kubectl-describe-deployments.png)
-* [Backend ECR image details](3.ECR.png)
-* [Frontend ECR image details](4ECR.png)
+These LoadBalancer hostnames are ephemeral and must be rechecked after any infrastructure recreation.
 
 ## Deliverables
 
