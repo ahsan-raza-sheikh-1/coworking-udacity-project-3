@@ -4,8 +4,8 @@ Complete this file from the public GitHub repository after the four workflows ha
 
 ## Public GitHub Repository
 
-* Repository: `REPLACE_BEFORE_SUBMISSION: https://github.com/<owner>/<public-repository>`
-* Actions: `REPLACE_BEFORE_SUBMISSION: https://github.com/<owner>/<public-repository>/actions`
+* Repository: [ahsan-raza-sheikh-1/coworking-udacity-project-3](https://github.com/ahsan-raza-sheikh-1/coworking-udacity-project-3)
+* Actions: [GitHub Actions](https://github.com/ahsan-raza-sheikh-1/coworking-udacity-project-3/actions)
 
 ## Required Workflows
 
@@ -18,10 +18,10 @@ Complete this file from the public GitHub repository after the four workflows ha
 
 Successful run links:
 
-* Frontend CI: `REPLACE_BEFORE_SUBMISSION: https://github.com/<owner>/<public-repository>/actions/workflows/frontend-ci.yaml`
-* Backend CI: `REPLACE_BEFORE_SUBMISSION: https://github.com/<owner>/<public-repository>/actions/workflows/backend-ci.yaml`
-* Frontend CD: `REPLACE_BEFORE_SUBMISSION: https://github.com/<owner>/<public-repository>/actions/workflows/frontend-cd.yaml`
-* Backend CD: `REPLACE_BEFORE_SUBMISSION: https://github.com/<owner>/<public-repository>/actions/workflows/backend-cd.yaml`
+* Frontend CI: [frontend-ci.yaml workflow](https://github.com/ahsan-raza-sheikh-1/coworking-udacity-project-3/actions/workflows/frontend-ci.yaml)
+* Backend CI: [backend-ci.yaml workflow](https://github.com/ahsan-raza-sheikh-1/coworking-udacity-project-3/actions/workflows/backend-ci.yaml)
+* Frontend CD: [frontend-cd.yaml workflow](https://github.com/ahsan-raza-sheikh-1/coworking-udacity-project-3/actions/workflows/frontend-cd.yaml)
+* Backend CD: [backend-cd.yaml workflow](https://github.com/ahsan-raza-sheikh-1/coworking-udacity-project-3/actions/workflows/backend-cd.yaml)
 
 ## Completion Order
 
@@ -95,3 +95,5 @@ Set `REACT_APP_MOVIE_API_URL` as a repository variable or secret and optionally 
 This submission package excludes local `.env` files, Terraform state and backups, `.terraform`, `node_modules`, React build output, test caches, and Python cache files.
 
 The generated `movie_picture_pipeline_submission.zip` includes this `SUBMISSION.md` file and all four workflow files under `.github/workflows/`.
+Archive note: This submission is packaged in movie_picture_pipeline_submission.zip.
+

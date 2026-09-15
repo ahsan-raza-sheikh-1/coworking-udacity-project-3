@@ -7,11 +7,47 @@ The team's project is comprised of 2 application.
 1. A frontend UI built written in Typescript, using the React framework
 2. A backend API written in Python using the Flask framework.
 
-In the `starter` folder, you'll find 2 folders, one named `frontend` and one named `backend`, where each application's source code is maintained. Your job is to use the team's [existing documentation](./starter/frontend/frontend-development-notes) and create CI/CD pipelines to meet the teams' needs.
+In the `starter` folder, you'll find 2 folders, one named `frontend` and one named `backend`, where each application's source code is maintained. Your job is to use the team's [existing documentation](./starter/frontend/frontend-development-notes.md) and create CI/CD pipelines to meet the teams' needs.
 
 ## Review submission
 
 Use [SUBMISSION.md](./SUBMISSION.md) as the reviewer-facing checklist. It records the four workflow files, the GitHub Actions run links, the live EKS application URLs, and the deployment evidence required when the AWS infrastructure is removed. Replace every `REPLACE_BEFORE_SUBMISSION` value with evidence from the public GitHub repository and the latest successful CD runs before submitting.
+
+## Project Status
+
+### GitHub Actions Workflows
+
+* Public repository: [ahsan-raza-sheikh-1/coworking-udacity-project-3](https://github.com/ahsan-raza-sheikh-1/coworking-udacity-project-3)
+* Actions: [workflow runs](https://github.com/ahsan-raza-sheikh-1/coworking-udacity-project-3/actions)
+
+The repository contains four workflows under `.github/workflows`:
+
+| Workflow | File | Trigger |
+| --- | --- | --- |
+| Frontend CI | [frontend-ci.yaml](.github/workflows/frontend-ci.yaml) | Pull requests to `main` and manual runs |
+| Backend CI | [backend-ci.yaml](.github/workflows/backend-ci.yaml) | Pull requests to `main` and manual runs |
+| Frontend CD | [frontend-cd.yaml](.github/workflows/frontend-cd.yaml) | Pushes to `main` and manual runs |
+| Backend CD | [backend-cd.yaml](.github/workflows/backend-cd.yaml) | Pushes to `main` and manual runs |
+
+The CI workflows run lint and tests in parallel before building Docker images. The CD workflows authenticate to AWS through GitHub Secrets, push SHA-tagged images to ECR, apply the Kubernetes manifests, update the deployment image, wait for rollout completion, and print the deployed image and LoadBalancer endpoint as deployment evidence. Successful run links belong in [SUBMISSION.md](SUBMISSION.md).
+
+### Verified AWS Deployment
+
+The following deployment was verified on 2026-09-15 in the `cluster` EKS cluster in `us-east-1`:
+
+* [Frontend application](http://a7c024243e31f43b78c74430083db0ae-618431148.us-east-1.elb.amazonaws.com/)
+* [Backend API](http://a02c2114e2ffb4b0b8976d392607e56c-1166134380.us-east-1.elb.amazonaws.com/movies)
+* Frontend image: `545852992340.dkr.ecr.us-east-1.amazonaws.com/frontend:35d5c5e3892cb0ecf507bb3221c674ab2fdcc95e`
+* Backend image: `545852992340.dkr.ecr.us-east-1.amazonaws.com/backend:35d5c5e3892cb0ecf507bb3221c674ab2fdcc95e`
+* Backend API returned HTTP 200 JSON containing 3 movies.
+* Frontend returned HTTP 200 and its bundle contained the live backend hostname and `/movies` path.
+* Both deployments were `1/1` ready with Running pods.
+
+These LoadBalancer hostnames are ephemeral and must be rechecked after any infrastructure recreation. See [SUBMISSION.md](SUBMISSION.md) for the complete evidence checklist.
+
+### Submission Package
+
+The reviewer checklist is in [SUBMISSION.md](SUBMISSION.md). The generated [movie_picture_pipeline_submission.zip](movie_picture_pipeline_submission.zip) includes the checklist, all four workflow files, application source, Kubernetes manifests, Terraform configuration, and buildspecs. It excludes `.env`, Git metadata, Terraform state, dependency folders, build output, caches, and nested ZIP files.
 
 ## Deliverables
 
@@ -273,7 +309,7 @@ To build the frontend application for a production deployment, they use the foll
 # The URL below would be the default backend URL when running locally
 docker build --build-arg=REACT_APP_MOVIE_API_URL=http://localhost:5000 --tag=mp-frontend:latest .
 
-docker run --name mp-frontend -p 3000:3000 -d mp-frontend]
+docker run --name mp-frontend -p 3000:3000 -d mp-frontend
 
 # Open the browser to localhost:3000 and you should see the list of movies,
 # provided the backend is already running and available on localhost:5000
@@ -411,7 +447,7 @@ docker logs -f mp-backend
 {"movies":[{"id":"123","title":"Top Gun: Maverick"},{"id":"456","title":"Sonic the Hedgehog"},{"id":"789","title":"A Quiet Place"}]}
 
 # Stop the application
-docker stop
+docker stop mp-backend
 ```
 
 ### Deploy Kubernetes manifests
