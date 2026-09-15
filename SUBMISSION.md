@@ -23,6 +23,21 @@ Successful run links:
 * Frontend CD: [frontend-cd.yaml workflow](https://github.com/ahsan-raza-sheikh-1/coworking-udacity-project-3/actions/workflows/frontend-cd.yaml)
 * Backend CD: [backend-cd.yaml workflow](https://github.com/ahsan-raza-sheikh-1/coworking-udacity-project-3/actions/workflows/backend-cd.yaml)
 
+## Reviewer Next Steps
+
+1. Share the correct [public GitHub repository](https://github.com/ahsan-raza-sheikh-1/coworking-udacity-project-3) for this project. It contains the application source and workflow files.
+2. Confirm two CI and two CD workflows under [GitHub Actions](https://github.com/ahsan-raza-sheikh-1/coworking-udacity-project-3/actions), with one successful run for each workflow.
+3. Submit the working frontend and backend EKS service URLs listed below after the successful CD workflows.
+4. If the infrastructure is deleted to save credits, submit screenshots showing the frontend URL, `kubectl get all`, `kubectl describe deployment`, and the latest frontend/backend ECR image details.
+
+Current evidence assets:
+
+* [Frontend application](evidence/frontend-application.png)
+* [Backend API](evidence/backend-api.png)
+* [LoadBalancer DNS list](2.LB.png)
+* [Backend ECR SHA-tagged image](3.ECR.png)
+* [Frontend ECR SHA-tagged image](4ECR.png)
+
 ## Completion Order
 
 1. Push the project to a public GitHub repository. Do not push `.env` or any AWS credential values.
@@ -44,7 +59,7 @@ Copy these values from the `Record deployment evidence` step in the latest succe
 * Frontend image digest: `sha256:75450884947cad36676bbfb5b12bf2d37cb6f748a58e4c942d321f4fc8b2baf9`
 * Backend image digest: `sha256:b8be4c6325089a09c0bcbe6de892aa0bbcb399760d9a3cfc9001806d89ecfbba`
 * Image tag source commit: `35d5c5e3892cb0ecf507bb3221c674ab2fdcc95e`
-* Latest local evidence commit: `e852305b9d9335099822c08ee600b226721732a0`
+* Latest local evidence commit: `870fcc43d12f175e0ad5aa0210ac1fb83672af56`
 
 Verify both URLs from a browser or HTTP client before submitting. The frontend must load the movie list and the backend endpoint must return HTTP 200 JSON containing a `movies` list.
 

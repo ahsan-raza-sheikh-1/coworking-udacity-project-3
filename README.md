@@ -49,6 +49,21 @@ These LoadBalancer hostnames are ephemeral and must be rechecked after any infra
 
 The reviewer checklist is in [SUBMISSION.md](SUBMISSION.md). The generated [movie_picture_pipeline_submission.zip](movie_picture_pipeline_submission.zip) includes the checklist, all four workflow files, application source, Kubernetes manifests, Terraform configuration, and buildspecs. It excludes `.env`, Git metadata, Terraform state, dependency folders, build output, caches, and nested ZIP files.
 
+## Reviewer Next Steps
+
+1. Share the correct [public GitHub repository](https://github.com/ahsan-raza-sheikh-1/coworking-udacity-project-3) for this project. It contains the application source and all four workflow files.
+2. Verify the four workflows under [GitHub Actions](https://github.com/ahsan-raza-sheikh-1/coworking-udacity-project-3/actions): two CI workflows and two CD workflows. Each workflow must have a successful run before final submission.
+3. Submit the working [frontend application](http://a7c024243e31f43b78c74430083db0ae-618431148.us-east-1.elb.amazonaws.com/) and [backend API](http://a02c2114e2ffb4b0b8976d392607e56c-1166134380.us-east-1.elb.amazonaws.com/movies) URLs after the successful CD runs.
+4. If the AWS infrastructure is deleted to save credits, submit evidence for the frontend browser URL, `kubectl get all`, `kubectl describe deployment`, and the latest frontend/backend ECR image details.
+
+### Evidence Images
+
+* [Frontend application screenshot](evidence/frontend-application.png)
+* [Backend API screenshot](evidence/backend-api.png)
+* [LoadBalancer screenshot](2.LB.png)
+* [Backend ECR image details](3.ECR.png)
+* [Frontend ECR image details](4ECR.png)
+
 ## Deliverables
 
 ### Frontend
