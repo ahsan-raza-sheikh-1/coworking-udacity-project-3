@@ -45,18 +45,6 @@ The following deployment was verified on 2026-09-15 in the `cluster` EKS cluster
 
 These LoadBalancer hostnames are ephemeral and must be rechecked after any infrastructure recreation.
 
-### Deployment Evidence
-
-Current screenshots and deployment details are in [ScreenShots/README.md](ScreenShots/README.md):
-
-* [Frontend application](ScreenShots/frontend-application.png)
-* [Backend API](ScreenShots/backend-api.png)
-* [Frontend ECR image](ScreenShots/ecr-frontend.png)
-* [Backend ECR image](ScreenShots/ecr-backend.png)
-* [LoadBalancer services](ScreenShots/load-balancer.png)
-* [`kubectl get all`](ScreenShots/kubectl-get-all.png)
-* [`kubectl describe deployment`](ScreenShots/kubectl-describe-deployments.png)
-
 ## Deliverables
 
 ### Frontend
@@ -136,7 +124,7 @@ terraform output
 
 ### Add Github Action user to Kubernetes
 
-Now that the cluster and all AWS resources have been created, you'll need to add the `github-action-user` IAM user ARN to the Kubernetes configuration that will allow that user to execute `kubectl` commands against the cluster.
+Now that the cluster and all AWS resources have been created, you'll need to add the `github-action-user2` IAM user ARN to the Kubernetes configuration that will allow that user to execute `kubectl` commands against the cluster.
 
 1. Run the `init.sh` helper script in the `setup` folder
 
@@ -153,6 +141,7 @@ The workflows in `.github/workflows` use GitHub Actions secrets and variables ra
 
 * `AWS_ACCESS_KEY_ID`
 * `AWS_SECRET_ACCESS_KEY`
+* `AWS_SESSION_TOKEN` (only when using temporary AWS credentials)
 * `AWS_REGION` (optional; defaults to `us-east-1`)
 
 After the backend service has an external address, add `REACT_APP_MOVIE_API_URL` as a repository variable or secret. The value should be the backend URL without the `/movies` path, for example `http://<backend-load-balancer-hostname>`. The frontend deployment passes this value to Docker as a build argument. `EKS_CLUSTER_NAME` is an optional repository variable and defaults to `cluster`.
