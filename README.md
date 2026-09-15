@@ -52,6 +52,8 @@ The [movie_picture_pipeline_submission.zip](movie_picture_pipeline_submission.zi
 * [Frontend application screenshot](evidence/frontend-application.png)
 * [Backend API screenshot](evidence/backend-api.png)
 * [LoadBalancer screenshot](2.LB.png)
+* [`kubectl get all` screenshot](evidence/kubectl-get-all.png)
+* [`kubectl describe deployment` screenshot](evidence/kubectl-describe-deployments.png)
 * [Backend ECR image details](3.ECR.png)
 * [Frontend ECR image details](4ECR.png)
 

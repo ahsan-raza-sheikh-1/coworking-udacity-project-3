@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>kubectl describe deployments</title>
+<style>
+body { margin: 0; background: #101418; color: #e8edf2; font-family: Consolas, "Courier New", monospace; }
+header { padding: 18px 24px; background: #1b2229; border-bottom: 1px solid #39434d; font-family: Arial, sans-serif; }
+h1 { margin: 0 0 6px; font-size: 20px; }
+p { margin: 0; color: #aeb9c4; font-size: 13px; }
+section { padding: 22px 24px; border-bottom: 1px solid #39434d; }
+h2 { margin: 0 0 14px; color: #9ed0ff; font: 600 16px Arial, sans-serif; }
+pre { margin: 0; font-size: 14px; line-height: 1.45; white-space: pre-wrap; }
+</style>
+</head>
+<body>
+<header><h1>kubectl describe deployment frontend/backend -n default</h1><p>Verified 2026-09-15 against the cluster deployment</p></header>
+<section><h2>PS&gt; kubectl describe deployment frontend -n default</h2><pre>Name:                   frontend
+Namespace:              default
+CreationTimestamp:      Tue, 15 Sep 2026 02:45:30 +0800
+Labels:                 app=frontend
+Annotations:            deployment.kubernetes.io/revision: 3
+Selector:               app=frontend
+Replicas:               1 desired | 1 updated | 1 total | 1 available | 0 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  25% max unavailable, 25% max surge
+Pod Template:
+  Labels:  app=frontend
+  Containers:
+   frontend:
+    Image:         545852992340.dkr.ecr.us-east-1.amazonaws.com/frontend:35d5c5e3892cb0ecf507bb3221c674ab2fdcc95e
+    Port:          3000/TCP
+    Host Port:     0/TCP
+    Environment:   &lt;none&gt;
+    Mounts:        &lt;none&gt;
+  Volumes:         &lt;none&gt;
+  Node-Selectors:  &lt;none&gt;
+  Tolerations:     &lt;none&gt;
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Available      True    MinimumReplicasAvailable
+  Progressing    True    NewReplicaSetAvailable
+OldReplicaSets:  frontend-5c67558bd5 (0/0 replicas created), frontend-7549fdd8bb (0/0 replicas created)
+NewReplicaSet:   frontend-5dcfbdc8 (1/1 replicas created)
+Events:          &lt;none&gt;</pre></section>
+<section><h2>PS&gt; kubectl describe deployment backend -n default</h2><pre>Name:                   backend
+Namespace:              default
+CreationTimestamp:      Tue, 15 Sep 2026 02:40:58 +0800
+Labels:                 app=backend
+Annotations:            deployment.kubernetes.io/revision: 3
+Selector:               app=backend
+Replicas:               1 desired | 1 updated | 1 total | 1 available | 0 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  25% max unavailable, 25% max surge
+Pod Template:
+  Labels:  app=backend
+  Containers:
+   backend:
+    Image:         545852992340.dkr.ecr.us-east-1.amazonaws.com/backend:35d5c5e3892cb0ecf507bb3221c674ab2fdcc95e
+    Port:          5000/TCP
+    Host Port:     0/TCP
+    Environment:   &lt;none&gt;
+    Mounts:        &lt;none&gt;
+  Volumes:         &lt;none&gt;
+  Node-Selectors:  &lt;none&gt;
+  Tolerations:     &lt;none&gt;
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Available      True    MinimumReplicasAvailable
+  Progressing    True    NewReplicaSetAvailable
+OldReplicaSets:  backend-65fb97688f (0/0 replicas created), backend-7b87c6f5c9 (0/0 replicas created)
+NewReplicaSet:   backend-84984d79db (1/1 replicas created)
+Events:          &lt;none&gt;</pre></section>
+</body>
+</html>

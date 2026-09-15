@@ -30,6 +30,8 @@ Evidence assets:
 * [Frontend application](evidence/frontend-application.png)
 * [Backend API](evidence/backend-api.png)
 * [LoadBalancer DNS list](2.LB.png)
+* [`kubectl get all` output](evidence/kubectl-get-all.png)
+* [`kubectl describe deployment` output](evidence/kubectl-describe-deployments.png)
 * [Backend ECR SHA-tagged image](3.ECR.png)
 * [Frontend ECR SHA-tagged image](4ECR.png)
 
