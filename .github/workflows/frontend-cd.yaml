@@ -147,6 +147,13 @@ jobs:
           printf '\nimages:\n  - name: frontend\n    newName: %s\n    newTag: %s\n' "$IMAGE_REPOSITORY" "$IMAGE_TAG" >> kustomization.yaml
           kubectl apply -k .
 
+      - name: Remove obsolete frontend ReplicaSets
+        run: |
+          old_replicasets=$(kubectl -n default get rs -l app=frontend -o json | jq -r '.items[] | select((.spec.replicas // 0) == 0) | .metadata.name')
+          if [ -n "$old_replicasets" ]; then
+            kubectl -n default delete rs $old_replicasets --cascade=background --ignore-not-found --wait=false
+          fi
+
       - name: Remove stale terminating frontend pods
         run: |
           stale_pods=$(kubectl -n default get pods -l app=frontend -o json | jq -r '.items[] | select(.metadata.deletionTimestamp != null) | .metadata.name')
