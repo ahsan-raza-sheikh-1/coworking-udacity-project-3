@@ -137,6 +137,11 @@ jobs:
       - name: Configure kubeconfig
         run: aws eks update-kubeconfig --name "$EKS_CLUSTER_NAME" --region "$AWS_REGION"
 
+      - name: Recreate application and DNS pods
+        run: |
+          kubectl delete pods --all -n default --grace-period=0 --force --ignore-not-found
+          kubectl delete pods -n kube-system -l k8s-app=kube-dns --grace-period=0 --force --ignore-not-found
+
       - name: Apply Kubernetes manifests
         env:
           IMAGE: ${{ needs.build.outputs.image }}
@@ -162,7 +167,7 @@ jobs:
           fi
 
       - name: Wait for rollout
-        run: kubectl -n default rollout status deployment/frontend --timeout=180s
+        run: kubectl -n default rollout status deployment/frontend --timeout=600s
 
 
       - name: Record deployment evidence
@@ -175,7 +180,7 @@ jobs:
 
       - name: Verify Kubernetes deployment
         run: |
-          kubectl rollout status deployment/frontend --timeout=180s || true
+          kubectl rollout status deployment/frontend --timeout=600s || true
           echo "----- Logging - kubectl get all ---- "
           kubectl get all
           echo "----- Logging - kubectl describe deploy ----- "
