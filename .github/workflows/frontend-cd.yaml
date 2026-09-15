@@ -1,0 +1,155 @@
+name: Frontend Continuous Deployment
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - starter/frontend/**
+      - .github/workflows/frontend-cd.yaml
+
+permissions:
+  contents: read
+
+env:
+  AWS_REGION: ${{ secrets.AWS_REGION || 'us-east-1' }}
+  EKS_CLUSTER_NAME: ${{ vars.EKS_CLUSTER_NAME || 'cluster' }}
+
+jobs:
+  lint:
+    name: Lint frontend
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: starter/frontend
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Cache npm
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-npm-${{ hashFiles('starter/frontend/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run lint
+        run: npm run lint
+
+  test:
+    name: Test frontend
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: starter/frontend
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Cache npm
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-npm-${{ hashFiles('starter/frontend/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        env:
+          CI: true
+        run: npm run test
+
+  build:
+    name: Build and push frontend image
+    needs: [lint, test]
+    runs-on: ubuntu-latest
+    outputs:
+      image: ${{ steps.image.outputs.image }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Log in to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Set image name
+        id: image
+        env:
+          REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        run: echo "image=${REGISTRY}/frontend:${GITHUB_SHA}" >> "$GITHUB_OUTPUT"
+
+      - name: Build and push Docker image
+        working-directory: starter/frontend
+        env:
+          IMAGE: ${{ steps.image.outputs.image }}
+          REACT_APP_MOVIE_API_URL: ${{ vars.REACT_APP_MOVIE_API_URL || secrets.REACT_APP_MOVIE_API_URL }}
+        run: |
+          if [ -z "$REACT_APP_MOVIE_API_URL" ]; then
+            echo "::error::Set the REACT_APP_MOVIE_API_URL repository variable or secret before deploying the frontend."
+            exit 1
+          fi
+          docker build --build-arg "REACT_APP_MOVIE_API_URL=$REACT_APP_MOVIE_API_URL" --tag "$IMAGE" .
+          docker push "$IMAGE"
+
+  deploy:
+    name: Deploy frontend to EKS
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Configure kubeconfig
+        run: aws eks update-kubeconfig --name "$EKS_CLUSTER_NAME" --region "$AWS_REGION"
+
+      - name: Apply Kubernetes manifests
+        run: kubectl apply -k starter/frontend/k8s
+
+      - name: Set deployed image
+        env:
+          IMAGE: ${{ needs.build.outputs.image }}
+        run: kubectl -n default set image deployment/frontend frontend="$IMAGE"
+
+      - name: Wait for rollout
+        run: kubectl -n default rollout status deployment/frontend --timeout=180s
+
+      - name: Record deployment evidence
+        env:
+          IMAGE: ${{ needs.build.outputs.image }}
+        run: |
+          echo "Frontend image: $IMAGE"
+          kubectl -n default get deployment frontend -o wide
+          kubectl -n default get service frontend -o wide

@@ -1,0 +1,19 @@
+.env
+.env.*
+!.env.example
+
+# Terraform local state and working files
+setup/terraform/.terraform/
+setup/terraform/*.tfstate
+setup/terraform/*.tfstate.*
+
+# Python cache and test output
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+
+# Node dependencies and build output
+node_modules/
+starter/frontend/build/
+starter/frontend/coverage/

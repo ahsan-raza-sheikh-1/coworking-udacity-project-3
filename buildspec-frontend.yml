@@ -1,0 +1,21 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
+      - REGISTRY="${ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com"
+      - IMAGE="${REGISTRY}/frontend:${IMAGE_TAG}"
+      - aws ecr get-login-password --region "${AWS_DEFAULT_REGION}" | docker login --username AWS --password-stdin "${REGISTRY}"
+  build:
+    commands:
+      - test -f "${CODEBUILD_SRC_DIR}/starter/frontend/Dockerfile"
+      - docker build --build-arg "REACT_APP_MOVIE_API_URL=${REACT_APP_MOVIE_API_URL}" --tag "${IMAGE}" "${CODEBUILD_SRC_DIR}/starter/frontend"
+      - docker push "${IMAGE}"
+  post_build:
+    commands:
+      - printf '{"image":"%s"}\n' "${IMAGE}" > frontend-image.json
+
+artifacts:
+  files:
+    - frontend-image.json
