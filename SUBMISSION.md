@@ -39,8 +39,11 @@ Copy these values from the `Record deployment evidence` step in the latest succe
 
 * Frontend application: http://a7c024243e31f43b78c74430083db0ae-618431148.us-east-1.elb.amazonaws.com/
 * Backend API: http://a02c2114e2ffb4b0b8976d392607e56c-1166134380.us-east-1.elb.amazonaws.com/movies
-* Current frontend image: `545852992340.dkr.ecr.us-east-1.amazonaws.com/frontend:cloud-frontend-20260915024304` (CodeBuild tag; replace with the successful GitHub CD SHA tag before final submission.)
-* Current backend image: `545852992340.dkr.ecr.us-east-1.amazonaws.com/backend:cloud-backend-20260915023810` (CodeBuild tag; replace with the successful GitHub CD SHA tag before final submission.)
+* Current frontend image: `545852992340.dkr.ecr.us-east-1.amazonaws.com/frontend:35d5c5e3892cb0ecf507bb3221c674ab2fdcc95e`
+* Current backend image: `545852992340.dkr.ecr.us-east-1.amazonaws.com/backend:35d5c5e3892cb0ecf507bb3221c674ab2fdcc95e`
+* Frontend image digest: `sha256:75450884947cad36676bbfb5b12bf2d37cb6f748a58e4c942d321f4fc8b2baf9`
+* Backend image digest: `sha256:b8be4c6325089a09c0bcbe6de892aa0bbcb399760d9a3cfc9001806d89ecfbba`
+* Local submission commit: `35d5c5e3892cb0ecf507bb3221c674ab2fdcc95e`
 
 Verify both URLs from a browser or HTTP client before submitting. The frontend must load the movie list and the backend endpoint must return HTTP 200 JSON containing a `movies` list.
 
