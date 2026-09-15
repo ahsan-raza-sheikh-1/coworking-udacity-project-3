@@ -11,10 +11,10 @@ Complete this file from the public GitHub repository after the four workflows ha
 
 | Workflow | File | Required trigger and result |
 | --- | --- | --- |
-| Frontend CI | [.github/workflows/frontend-ci.yaml](.github/workflows/frontend-ci.yaml) | Pull request to `main` or manual run; lint and test run in parallel, then the Docker build passes. |
-| Backend CI | [.github/workflows/backend-ci.yaml](.github/workflows/backend-ci.yaml) | Pull request to `main` or manual run; lint and test run in parallel, then the Docker build passes. |
-| Frontend CD | [.github/workflows/frontend-cd.yaml](.github/workflows/frontend-cd.yaml) | Push to `main` or manual run; image is pushed to ECR and the EKS rollout succeeds. |
-| Backend CD | [.github/workflows/backend-cd.yaml](.github/workflows/backend-cd.yaml) | Push to `main` or manual run; image is pushed to ECR and the EKS rollout succeeds. |
+| Frontend CI | [frontend-ci.yaml](.github/workflows/frontend-ci.yaml) | Pull request to `main` or manual run; lint and test run in parallel, then the Docker build passes. |
+| Backend CI | [backend-ci.yaml](.github/workflows/backend-ci.yaml) | Pull request to `main` or manual run; lint and test run in parallel, then the Docker build passes. |
+| Frontend CD | [frontend-cd.yaml](.github/workflows/frontend-cd.yaml) | Push to `main` or manual run; image is pushed to ECR and the EKS rollout succeeds. |
+| Backend CD | [backend-cd.yaml](.github/workflows/backend-cd.yaml) | Push to `main` or manual run; image is pushed to ECR and the EKS rollout succeeds. |
 
 Successful run links:
 
@@ -43,7 +43,8 @@ Copy these values from the `Record deployment evidence` step in the latest succe
 * Current backend image: `545852992340.dkr.ecr.us-east-1.amazonaws.com/backend:35d5c5e3892cb0ecf507bb3221c674ab2fdcc95e`
 * Frontend image digest: `sha256:75450884947cad36676bbfb5b12bf2d37cb6f748a58e4c942d321f4fc8b2baf9`
 * Backend image digest: `sha256:b8be4c6325089a09c0bcbe6de892aa0bbcb399760d9a3cfc9001806d89ecfbba`
-* Local submission commit: `35d5c5e3892cb0ecf507bb3221c674ab2fdcc95e`
+* Image tag source commit: `35d5c5e3892cb0ecf507bb3221c674ab2fdcc95e`
+* Latest local evidence commit: `e852305b9d9335099822c08ee600b226721732a0`
 
 Verify both URLs from a browser or HTTP client before submitting. The frontend must load the movie list and the backend endpoint must return HTTP 200 JSON containing a `movies` list.
 
