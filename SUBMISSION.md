@@ -46,7 +46,7 @@ Copy these values from the `Record deployment evidence` step in the latest succe
 * Frontend image digest: `sha256:75450884947cad36676bbfb5b12bf2d37cb6f748a58e4c942d321f4fc8b2baf9`
 * Backend image digest: `sha256:b8be4c6325089a09c0bcbe6de892aa0bbcb399760d9a3cfc9001806d89ecfbba`
 * Image tag source commit: `35d5c5e3892cb0ecf507bb3221c674ab2fdcc95e`
-* Latest local evidence commit: `870fcc43d12f175e0ad5aa0210ac1fb83672af56`
+* Latest local evidence commit: `e0c7d677365edb1729c2f6fe39fba388502130a4`
 
 Verify both URLs from a browser or HTTP client before submitting. The frontend must load the movie list and the backend endpoint must return HTTP 200 JSON containing a `movies` list.
 
