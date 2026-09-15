@@ -53,6 +53,7 @@ Current screenshots and deployment details are in [evidence/README.md](evidence/
 * [Backend API](evidence/backend-api.png)
 * [Frontend ECR image](evidence/ecr-frontend.png)
 * [Backend ECR image](evidence/ecr-backend.png)
+* [LoadBalancer services](evidence/load-balancer.png)
 * [`kubectl get all`](evidence/kubectl-get-all.png)
 * [`kubectl describe deployment`](evidence/kubectl-describe-deployments.png)
 

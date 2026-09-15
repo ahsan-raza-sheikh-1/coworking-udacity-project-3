@@ -27,6 +27,7 @@ The frontend served the React Movie List and the backend returned HTTP 200 JSON 
 ## Screenshots
 
 - `frontend-application.png`: frontend URL and Movie List
+- `load-balancer.png`: current frontend and backend LoadBalancer DNS names and ports
 - `backend-api.png`: backend `/movies` response
 - `ecr-frontend.png`: frontend ECR tag and digest
 - `ecr-backend.png`: backend ECR tag and digest
