@@ -45,6 +45,17 @@ The following deployment was verified on 2026-09-15 in the `cluster` EKS cluster
 
 These LoadBalancer hostnames are ephemeral and must be rechecked after any infrastructure recreation.
 
+### Deployment Evidence
+
+Current screenshots and deployment details are in [evidence/README.md](evidence/README.md):
+
+* [Frontend application](evidence/frontend-application.png)
+* [Backend API](evidence/backend-api.png)
+* [Frontend ECR image](evidence/ecr-frontend.png)
+* [Backend ECR image](evidence/ecr-backend.png)
+* [`kubectl get all`](evidence/kubectl-get-all.png)
+* [`kubectl describe deployment`](evidence/kubectl-describe-deployments.png)
+
 ## Deliverables
 
 ### Frontend
