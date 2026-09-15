@@ -47,15 +47,15 @@ These LoadBalancer hostnames are ephemeral and must be rechecked after any infra
 
 ### Deployment Evidence
 
-Current screenshots and deployment details are in [evidence/README.md](evidence/README.md):
+Current screenshots and deployment details are in [ScreenShots/README.md](ScreenShots/README.md):
 
-* [Frontend application](evidence/frontend-application.png)
-* [Backend API](evidence/backend-api.png)
-* [Frontend ECR image](evidence/ecr-frontend.png)
-* [Backend ECR image](evidence/ecr-backend.png)
-* [LoadBalancer services](evidence/load-balancer.png)
-* [`kubectl get all`](evidence/kubectl-get-all.png)
-* [`kubectl describe deployment`](evidence/kubectl-describe-deployments.png)
+* [Frontend application](ScreenShots/frontend-application.png)
+* [Backend API](ScreenShots/backend-api.png)
+* [Frontend ECR image](ScreenShots/ecr-frontend.png)
+* [Backend ECR image](ScreenShots/ecr-backend.png)
+* [LoadBalancer services](ScreenShots/load-balancer.png)
+* [`kubectl get all`](ScreenShots/kubectl-get-all.png)
+* [`kubectl describe deployment`](ScreenShots/kubectl-describe-deployments.png)
 
 ## Deliverables
 
