@@ -149,8 +149,16 @@ jobs:
           printf '\nimages:\n  - name: backend\n    newName: %s\n    newTag: %s\n' "$IMAGE_REPOSITORY" "$IMAGE_TAG" >> kustomization.yaml
           kubectl apply -k .
 
+      - name: Remove stale terminating backend pods
+        run: |
+          stale_pods=$(kubectl -n default get pods -l app=backend -o json | jq -r '.items[] | select(.metadata.deletionTimestamp != null) | .metadata.name')
+          if [ -n "$stale_pods" ]; then
+            kubectl -n default delete pod $stale_pods --grace-period=0 --force
+          fi
+
       - name: Wait for rollout
         run: kubectl -n default rollout status deployment/backend --timeout=180s
+
 
       - name: Record deployment evidence
         env:
