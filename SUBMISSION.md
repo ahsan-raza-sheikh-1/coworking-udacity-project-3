@@ -93,3 +93,5 @@ Set `REACT_APP_MOVIE_API_URL` as a repository variable or secret and optionally 
 ## Package Contents
 
 This submission package excludes local `.env` files, Terraform state and backups, `.terraform`, `node_modules`, React build output, test caches, and Python cache files.
+
+The generated `movie_picture_pipeline_submission.zip` includes this `SUBMISSION.md` file and all four workflow files under `.github/workflows/`.
