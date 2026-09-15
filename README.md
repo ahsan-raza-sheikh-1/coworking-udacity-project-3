@@ -9,9 +9,9 @@ The team's project is comprised of 2 application.
 
 In the `starter` folder, you'll find 2 folders, one named `frontend` and one named `backend`, where each application's source code is maintained. Your job is to use the team's [existing documentation](./starter/frontend/frontend-development-notes.md) and create CI/CD pipelines to meet the teams' needs.
 
-## Review submission
+## Deployment and submission
 
-Use [SUBMISSION.md](./SUBMISSION.md) as the reviewer-facing checklist. It records the four workflow files, the GitHub Actions workflow links, the live EKS application URLs, and the deployment evidence required when the AWS infrastructure is removed. Add the successful run URLs after the workflows complete before submitting.
+The public repository is [ahsan-raza-sheikh-1/coworking-udacity-project-3](https://github.com/ahsan-raza-sheikh-1/coworking-udacity-project-3). [SUBMISSION.md](./SUBMISSION.md) contains the workflow links, deployment endpoints, image references, and evidence files for this project.
 
 ## Project Status
 
@@ -45,18 +45,9 @@ The following deployment was verified on 2026-09-15 in the `cluster` EKS cluster
 
 These LoadBalancer hostnames are ephemeral and must be rechecked after any infrastructure recreation. See [SUBMISSION.md](SUBMISSION.md) for the complete evidence checklist.
 
-### Submission Package
+### Submission package and evidence
 
-The reviewer checklist is in [SUBMISSION.md](SUBMISSION.md). The generated [movie_picture_pipeline_submission.zip](movie_picture_pipeline_submission.zip) includes the checklist, all four workflow files, application source, Kubernetes manifests, Terraform configuration, and buildspecs. It excludes `.env`, Git metadata, Terraform state, dependency folders, build output, caches, and nested ZIP files.
-
-## Reviewer Next Steps
-
-1. Share the correct [public GitHub repository](https://github.com/ahsan-raza-sheikh-1/coworking-udacity-project-3) for this project. It contains the application source and all four workflow files.
-2. Verify the four workflows under [GitHub Actions](https://github.com/ahsan-raza-sheikh-1/coworking-udacity-project-3/actions): two CI workflows and two CD workflows. Each workflow must have a successful run before final submission.
-3. Submit the working [frontend application](http://a7c024243e31f43b78c74430083db0ae-618431148.us-east-1.elb.amazonaws.com/) and [backend API](http://a02c2114e2ffb4b0b8976d392607e56c-1166134380.us-east-1.elb.amazonaws.com/movies) URLs after the successful CD runs.
-4. If the AWS infrastructure is deleted to save credits, submit evidence for the frontend browser URL, `kubectl get all`, `kubectl describe deployment`, and the latest frontend/backend ECR image details.
-
-### Evidence Images
+The [movie_picture_pipeline_submission.zip](movie_picture_pipeline_submission.zip) archive includes the application source, four workflow files, Kubernetes manifests, Terraform configuration, buildspecs, and evidence images. It excludes `.env`, Git metadata, Terraform state, dependency folders, build output, caches, and nested ZIP files. Successful run URLs should be added to [SUBMISSION.md](SUBMISSION.md) after the Actions workflows complete.
 
 * [Frontend application screenshot](evidence/frontend-application.png)
 * [Backend API screenshot](evidence/backend-api.png)

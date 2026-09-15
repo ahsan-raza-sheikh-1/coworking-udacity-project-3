@@ -1,6 +1,6 @@
 # Movie Picture Pipeline Submission
 
-Complete this file from the public GitHub repository after the four workflows have successful runs. Do not submit the old LoadBalancer hostnames from a previous cluster unless the live checks below succeed again.
+This document records the public repository, workflow pages, deployed endpoints, image references, and evidence for the Movie Picture Pipeline project.
 
 ## Public GitHub Repository
 
@@ -16,37 +16,22 @@ Complete this file from the public GitHub repository after the four workflows ha
 | Frontend CD | [frontend-cd.yaml](.github/workflows/frontend-cd.yaml) | Push to `main` or manual run; image is pushed to ECR and the EKS rollout succeeds. |
 | Backend CD | [backend-cd.yaml](.github/workflows/backend-cd.yaml) | Push to `main` or manual run; image is pushed to ECR and the EKS rollout succeeds. |
 
-Successful run links:
+Workflow run history:
 
 * Frontend CI: [frontend-ci.yaml workflow](https://github.com/ahsan-raza-sheikh-1/coworking-udacity-project-3/actions/workflows/frontend-ci.yaml)
 * Backend CI: [backend-ci.yaml workflow](https://github.com/ahsan-raza-sheikh-1/coworking-udacity-project-3/actions/workflows/backend-ci.yaml)
 * Frontend CD: [frontend-cd.yaml workflow](https://github.com/ahsan-raza-sheikh-1/coworking-udacity-project-3/actions/workflows/frontend-cd.yaml)
 * Backend CD: [backend-cd.yaml workflow](https://github.com/ahsan-raza-sheikh-1/coworking-udacity-project-3/actions/workflows/backend-cd.yaml)
 
-## Reviewer Next Steps
+The repository contains two CI workflows and two CD workflows. Record one successful run for each workflow in the corresponding workflow history page before final submission. The deployed service URLs and image references below are from the verified EKS deployment.
 
-1. Share the correct [public GitHub repository](https://github.com/ahsan-raza-sheikh-1/coworking-udacity-project-3) for this project. It contains the application source and workflow files.
-2. Confirm two CI and two CD workflows under [GitHub Actions](https://github.com/ahsan-raza-sheikh-1/coworking-udacity-project-3/actions), with one successful run for each workflow.
-3. Submit the working frontend and backend EKS service URLs listed below after the successful CD workflows.
-4. If the infrastructure is deleted to save credits, submit screenshots showing the frontend URL, `kubectl get all`, `kubectl describe deployment`, and the latest frontend/backend ECR image details.
-
-Current evidence assets:
+Evidence assets:
 
 * [Frontend application](evidence/frontend-application.png)
 * [Backend API](evidence/backend-api.png)
 * [LoadBalancer DNS list](2.LB.png)
 * [Backend ECR SHA-tagged image](3.ECR.png)
 * [Frontend ECR SHA-tagged image](4ECR.png)
-
-## Completion Order
-
-1. Push the project to a public GitHub repository. Do not push `.env` or any AWS credential values.
-2. Add `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, and `AWS_REGION` as GitHub Actions secrets. Add `EKS_CLUSTER_NAME` as a repository variable if the cluster is not named `cluster`.
-3. Run both CI workflows manually, or create a pull request targeting `main`, and save one successful run link for each.
-4. Run Backend CD. Copy the backend LoadBalancer hostname from its `Record deployment evidence` step.
-5. Set `REACT_APP_MOVIE_API_URL` to `http://<backend-load-balancer-hostname>` as a repository variable or secret.
-6. Run Frontend CD. Copy the frontend LoadBalancer hostname, deployed image SHA, and successful run link.
-7. Open both application URLs, verify the movie list and `/movies` JSON response, then capture the required screenshots before deleting the infrastructure.
 
 ## Live Application URLs
 
@@ -76,14 +61,9 @@ Infrastructure status at the same verification:
 * Backend deployment: `1/1` available and ready.
 * Frontend deployment: `1/1` available and ready.
 
-## Evidence If Infrastructure Is Deleted
+## Evidence
 
-Attach screenshots with the URL or command output visible:
-
-1. Frontend application open in a browser using its LoadBalancer URL.
-2. `kubectl get all -n default`.
-3. `kubectl describe deployment frontend -n default` and `kubectl describe deployment backend -n default`.
-4. Latest image details for both ECR repositories, including the Git SHA tag.
+If the AWS infrastructure is removed, retain screenshots showing the frontend LoadBalancer URL, `kubectl get all -n default`, `kubectl describe deployment frontend -n default`, `kubectl describe deployment backend -n default`, and the latest frontend and backend ECR image details including the Git SHA tag.
 
 Commands used to recreate the evidence:
 
@@ -109,6 +89,5 @@ Set `REACT_APP_MOVIE_API_URL` as a repository variable or secret and optionally 
 
 This submission package excludes local `.env` files, Terraform state and backups, `.terraform`, `node_modules`, React build output, test caches, and Python cache files.
 
-The generated `movie_picture_pipeline_submission.zip` includes this `SUBMISSION.md` file and all four workflow files under `.github/workflows/`.
-Archive note: This submission is packaged in movie_picture_pipeline_submission.zip.
+The `movie_picture_pipeline_submission.zip` archive includes this `SUBMISSION.md` file and all four workflow files under `.github/workflows/`.
 
