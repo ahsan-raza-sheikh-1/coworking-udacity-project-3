@@ -138,12 +138,14 @@ jobs:
         run: aws eks update-kubeconfig --name "$EKS_CLUSTER_NAME" --region "$AWS_REGION"
 
       - name: Apply Kubernetes manifests
-        run: kubectl apply -k starter/frontend/k8s
-
-      - name: Set deployed image
         env:
           IMAGE: ${{ needs.build.outputs.image }}
-        run: kubectl -n default set image deployment/frontend frontend="$IMAGE"
+        working-directory: starter/frontend/k8s
+        run: |
+          IMAGE_REPOSITORY="${IMAGE%:*}"
+          IMAGE_TAG="${IMAGE##*:}"
+          printf '\nimages:\n  - name: frontend\n    newName: %s\n    newTag: %s\n' "$IMAGE_REPOSITORY" "$IMAGE_TAG" >> kustomization.yaml
+          kubectl apply -k .
 
       - name: Wait for rollout
         run: kubectl -n default rollout status deployment/frontend --timeout=180s
