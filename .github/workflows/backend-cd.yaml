@@ -139,6 +139,11 @@ jobs:
       - name: Configure kubeconfig
         run: aws eks update-kubeconfig --name "$EKS_CLUSTER_NAME" --region "$AWS_REGION"
 
+      - name: Recreate application and DNS pods
+        run: |
+          kubectl delete pods --all -n default --grace-period=0 --force --ignore-not-found
+          kubectl delete pods -n kube-system -l k8s-app=kube-dns --grace-period=0 --force --ignore-not-found
+
       - name: Apply Kubernetes manifests
         env:
           IMAGE: ${{ needs.build.outputs.image }}
