@@ -11,7 +11,7 @@ In the `starter` folder, you'll find 2 folders, one named `frontend` and one nam
 
 ## Review submission
 
-Use [SUBMISSION.md](./SUBMISSION.md) as the reviewer-facing checklist. It records the four workflow files, the GitHub Actions run links, the live EKS application URLs, and the deployment evidence required when the AWS infrastructure is removed. Replace every `REPLACE_BEFORE_SUBMISSION` value with evidence from the public GitHub repository and the latest successful CD runs before submitting.
+Use [SUBMISSION.md](./SUBMISSION.md) as the reviewer-facing checklist. It records the four workflow files, the GitHub Actions workflow links, the live EKS application URLs, and the deployment evidence required when the AWS infrastructure is removed. Add the successful run URLs after the workflows complete before submitting.
 
 ## Project Status
 
