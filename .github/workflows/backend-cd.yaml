@@ -164,8 +164,7 @@ jobs:
           fi
 
       - name: Wait for rollout
-        run: kubectl -n default rollout status deployment/backend --timeout=180s
-
+        run: kubectl -n default rollout status deployment/backend --timeout=600s
 
       - name: Record deployment evidence
         env:
@@ -177,7 +176,7 @@ jobs:
 
       - name: Verify Kubernetes deployment
         run: |
-          kubectl rollout status deployment/backend --timeout=180s || true
+          kubectl rollout status deployment/backend --timeout=600s || true
           echo "----- Logging - kubectl get all ---- "
           kubectl get all
           echo "----- Logging - kubectl describe deploy ----- "
@@ -186,4 +185,4 @@ jobs:
       - name: Verify Backend ECR image
         run: |
           echo "----- Logging - Backend ECR Image Details ----- "
-          AWS_PAGER="" aws ecr describe-images --repository-name backend --region us-east-1 --query 'sort_by(imageDetails,&imagePushedAt)[-1].{Tags:imageTags,Digest:imageDigest,PushedAt:imagePushedAt}' --output table
+          AWS_PAGER="" aws ecr describe-images --repository-name backend --region us-east-1 --query 'sort_by(imageDetails,&imagePushedAt)[-1].{Tags:imageTags,Digest:imageDigest,PushedAt:imagePushedAt}'
